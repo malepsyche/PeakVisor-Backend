@@ -2,36 +2,36 @@ version: '3.8'
 services:
   backend:
     build: 
-      context: .
-      dockerfile: ./backend/Dockerfile
+      context: ./backend
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/app
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgresql://${DB_USER}:${DB_PASS}@db:5432/${DB_NAME}
+    # depends_on:
+    #   - db
+    # environment:
+    #   - DATABASE_URL=postgresql://${DB_USER}:${DB_PASS}@db:5432/${DB_NAME}
 
-  frontend:
-    build: 
-      context: .
-      dockerfile: ./frontend/Dockerfile
-    ports:
-      - "4200:4200"
-    volumes:
-      - ./frontend:/app
-    depends_on:
-      - backend
-    environment:
-      - BACKEND_URL=http://backend:3000/
+  # frontend:
+  #   build: 
+  #     context: .
+  #     dockerfile: ./frontend/Dockerfile
+  #   ports:
+  #     - "4200:4200"
+  #   volumes:
+  #     - ./frontend:/app
+  #   depends_on:
+  #     - backend
+  #   environment:
+  #     - BACKEND_URL=http://backend:3000/
 
   nginx:
-    build: ./nginx
+    build: 
+      context: ./nginx
     ports:
       - "80:80"
     depends_on:
-      - frontend
+      # - frontend
       - backend
 
   # db:
