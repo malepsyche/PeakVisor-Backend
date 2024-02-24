@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './backend/server.ts', // Adjust to your entry file
+  entry: 'server.ts', // Adjust to your entry file
   target: 'node',
   mode: 'production',
   output: {
