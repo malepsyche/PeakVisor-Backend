@@ -5,29 +5,11 @@ services:
       context: ./backend
     ports:
       - "3000:3000"
-    # maps directory relative to docker-compose.yml to container directory
-    volumes:
+    volumes: # maps directory relative to docker-compose.yml to container directory
       - ./backend/src:/app/src
       - ./backend/package.json:/app/package.json
       - ./backend/package-lock.json:/app/package-lock.json
       - /backend/node_modules:/app/node_modules
-    # depends_on:
-    #   - db
-    # environment:
-    #   - DATABASE_URL=postgresql://${DB_USER}:${DB_PASS}@db:5432/${DB_NAME}
-
-  # frontend:
-  #   build: 
-  #     context: .
-  #     dockerfile: ./frontend/Dockerfile
-  #   ports:
-  #     - "4200:4200"
-  #   volumes:
-  #     - ./frontend:/app
-  #   depends_on:
-  #     - backend
-  #   environment:
-  #     - BACKEND_URL=http://backend:3000/
 
   nginx:
     build: 
@@ -35,17 +17,6 @@ services:
     ports:
       - "80:80"
     depends_on:
-      # - frontend
       - backend
-
-  # db:
-  #   image: postgres:13
-  #   environment:
-  #     POSTGRES_PASSWORD: ${DB_PASS}
-  #     POSTGRES_USER: ${DB_USER}
-  #     POSTGRES_DB: ${DB_NAME}
-  #   volumes:
-  #     - pgdata:/var/lib/postgresql/data
-
-# volumes:
-#   pgdata:
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
