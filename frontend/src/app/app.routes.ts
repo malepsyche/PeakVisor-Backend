@@ -7,9 +7,9 @@ import { TrailsPage } from './trails/feature/trails.page';
 import { Error404Page } from './error404/feature/error404.page';
 import { OnboardingPage } from './onboarding/feature/onboarding.page';
 import { SettingsPage } from './settings/feature/settings.page';
-import { EventspageComponent } from './eventspage/feature/eventspage.component';
-import { ProfilepageComponent } from './profile/features/profilepage/profilepage.component';
-import { TrailinformationComponent } from './trailinformation/feature/trailinformation.component';
+import { EventsPage } from './events/feature/events.page';
+import { ProfilePage } from './profile/features/profile.page';
+import { TrailsInformationPage } from './trails-information/feature/trails-information.page';
 
 export const AppRoutes: Routes = [
     {
@@ -44,17 +44,17 @@ export const AppRoutes: Routes = [
     },
     {
         path: 'events',
-        component: EventspageComponent,
+        component: EventsPage,
         data: { animation: 'nextPage' }
     },
     {
         path: 'profile',
-        component: ProfilepageComponent,
+        component: ProfilePage,
         data: { animation: 'nextPage' }
     },
     {
         path: 'trailinfo',
-        component: TrailinformationComponent,
+        component: TrailsInformationPage,
         data: { animation: 'nextPage' }
     },
     { 

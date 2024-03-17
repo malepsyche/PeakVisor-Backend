@@ -6,17 +6,18 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@app/shared/feature/state/app-state/app.state';
 import { GraphicsLoaderService } from '@app/shared/data-access/graphics-loader/graphics-loader.service';
 import { ImageModule } from 'primeng/image';
+
 @Component({
   selector: 'app-photo-background',
   standalone: true,
-  imports: [ImageModule],
+  imports: [PageWrapperComponent, ImageModule],
   templateUrl: './photo-background.component.html',
   styleUrl: './photo-background.component.css'
 })
-export class PhotoBackgroundComponent extends PageWrapperComponent implements AfterContentInit {
+
+export class PhotoBackgroundComponent implements AfterContentInit {
   @Input() src:string =""
-  constructor(private authservice: AuthService, messageService:MessageService,store:Store<AppState>,private graphicsLoaderService:GraphicsLoaderService){
-    super(messageService,store)
+  constructor(private authservice: AuthService, private messageService:MessageService, private store:Store<AppState>,private graphicsLoaderService:GraphicsLoaderService){
     
   }
 

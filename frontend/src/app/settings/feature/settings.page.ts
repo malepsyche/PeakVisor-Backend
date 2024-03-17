@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '@app/shared/ui/header/header.component';
+import { PageWrapperComponent } from '@app/shared/ui/page-wrapper/page-wrapper.component';
 import { SettingsInputComponent } from '@app/shared/ui/settings-input/settings-input.component';
 import { DeletesectionComponent } from '../ui/deletesection/deletesection.component';
 
 @Component({
-  selector: 'app-settingspage',
+  selector: 'app-settings',
   standalone: true,
-  imports: [HeaderComponent, SettingsInputComponent,DeletesectionComponent],
+  imports: [PageWrapperComponent, SettingsInputComponent,DeletesectionComponent],
   templateUrl: './settings.page.html',
   styleUrl: './settings.page.css'
 })

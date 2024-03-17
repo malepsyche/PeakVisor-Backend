@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { HeaderComponent } from '@app/shared/ui/header/header.component';
+import { PageWrapperComponent } from '@app/shared/ui/page-wrapper/page-wrapper.component';
 import { ButtonComponent } from '@app/shared/ui/button/button.component';
 import { NgModel } from '@angular/forms';
 import { OnboardingcontentdisplayComponent } from '../ui/onboardingcontentdisplay/onboardingcontentdisplay.component';
-// import { OnboardcontentdisplayComponent } from '../../components/onboardcontentdisplay/onboardcontentdisplay.component';
 
 @Component({
-  selector: 'app-onboardingpage',
+  selector: 'app-onboarding',
   standalone: true,
-  imports: [HeaderComponent, ButtonComponent,OnboardingcontentdisplayComponent],
+  imports: [PageWrapperComponent, ButtonComponent,OnboardingcontentdisplayComponent],
   templateUrl: './onboarding.page.html',
   styleUrl: './onboarding.page.css'
 })
@@ -16,7 +15,6 @@ import { OnboardingcontentdisplayComponent } from '../ui/onboardingcontentdispla
 export class OnboardingPage {
   
   stage= 0;
-  
   
   nextStage(){
     this.stage+=1;
