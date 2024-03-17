@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventspageComponent } from './eventspage.component';
+import { TrailinformationComponent } from './trails-information.page';
 
-describe('EventspageComponent', () => {
-  let component: EventspageComponent;
-  let fixture: ComponentFixture<EventspageComponent>;
+describe('TrailinformationComponent', () => {
+  let component: TrailinformationComponent;
+  let fixture: ComponentFixture<TrailinformationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EventspageComponent]
+      imports: [TrailinformationComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EventspageComponent);
+    fixture = TestBed.createComponent(TrailinformationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

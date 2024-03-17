@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-
-import { HeaderComponent } from '@app/shared/ui/header/header.component';
 import { VideoComponent } from '@app/shared/ui/video/video.component';
 import { PhotoCardComponent } from '@app/shared/ui/photo-card/photo-card.component';
 import { GraphicsLoaderService } from '@app/shared/data-access/graphics-loader/graphics-loader.service';
 import { AuthService } from '@app/shared/data-access/auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { AppState } from '@app/shared/feature/state/app-state/app.state';
+import { Observable } from 'rxjs';
+import { SelectAuthenticated } from '@app/shared/feature/state/auth-state/auth-state.selector';
 import { Store } from '@ngrx/store';
 import { PageWrapperComponent } from '@app/shared/ui/page-wrapper/page-wrapper.component';
 import { VideoBackground } from '@app/shared/ui/video-background/video-background.component';
@@ -15,19 +15,28 @@ import { GridsectionComponent } from '@app/shared/ui/gridsection/gridsection.com
 import { ButtongroupComponent } from '../ui/buttongroup/buttongroup.component';
 
 @Component({
-  selector: 'app-trails-page',
+  selector: 'app-trails',
   standalone: true,
-  imports: [HeaderComponent, VideoComponent, PhotoCardComponent,VideoBackground,HeroComponent,GridsectionComponent,ButtongroupComponent],
+  imports: [PageWrapperComponent, VideoComponent, PhotoCardComponent,VideoBackground,HeroComponent,GridsectionComponent,ButtongroupComponent],
   providers:[GraphicsLoaderService, AuthService,MessageService],
   templateUrl: './trails.page.html',
   styleUrl: './trails.page.css'
 })
 
-export class TrailsPage extends PageWrapperComponent {
+export class TrailsPage {
+
   src:string;
   content = [{name:'MacRitchie',routerLink:'/trailinfo'},{name:'East Coast Park',routerLink:'/trailinfo'},{name:'Botanic Gardens',routerLink:'/trailinfo'},{name:'Chinese Garden',routerLink:'/trailinfo'}]
-  constructor(private authservice: AuthService, messageService:MessageService,store:Store<AppState>,private graphicsLoaderService:GraphicsLoaderService){
-    super(messageService,store)
+  authState$:Observable<boolean>;
+
+  constructor(
+    private authservice: AuthService, 
+    private messageService: MessageService,
+    private store:Store<AppState>,
+    private graphicsLoaderService:GraphicsLoaderService
+  ){
+    this.authState$ = this.store.select(SelectAuthenticated)
     this.src = this.graphicsLoaderService.getGraphic('trailspagevideo')
   }
+
 }

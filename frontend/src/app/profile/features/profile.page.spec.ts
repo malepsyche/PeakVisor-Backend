@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TrailinformationComponent } from './trailinformation.component';
+import { ProfilePage } from './profile.page';
 
-describe('TrailinformationComponent', () => {
-  let component: TrailinformationComponent;
-  let fixture: ComponentFixture<TrailinformationComponent>;
+describe('ProfilePage', () => {
+  let component: ProfilePage;
+  let fixture: ComponentFixture<ProfilePage>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TrailinformationComponent]
+      imports: [ProfilePage]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TrailinformationComponent);
+    fixture = TestBed.createComponent(ProfilePage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

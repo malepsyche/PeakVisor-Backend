@@ -1,4 +1,11 @@
 <p-sidebar class="" [(visible)]="sidebarVisible">
     <h3>Menu</h3>
+        <app-button  [text]="true" routerLink="/" label="Home"/> 
+        <app-button  [text]="true" routerLink="/trails" label="Trails"/>
+        <app-button *ngIf="!(authState$|async)" routerLink="/login" label="Login"/>
+        <app-button *ngIf="authState$|async" routerLink="/login" label="Menu"/>
+        <div class="inline-flex justify-content-start">
+            <app-icon-button/>
+        </div>
     <ng-content></ng-content>
 </p-sidebar>

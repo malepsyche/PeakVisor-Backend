@@ -13,15 +13,15 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-eventspage',
   standalone: true,
-  imports: [HeroComponent,ButtonComponent,GridsectionComponent,VideoBackground],
-  templateUrl: './eventspage.component.html',
-  styleUrl: './eventspage.component.css'
+  imports: [PageWrapperComponent, HeroComponent, ButtonComponent, GridsectionComponent, VideoBackground],
+  templateUrl: './events.page.html',
+  styleUrl: './events.page.css'
 })
-export class EventspageComponent extends PageWrapperComponent {
+
+export class EventsPage {
   content = [{name:'kakais'}]
   src:string;
   constructor(private authservice: AuthService, messageService:MessageService,store:Store<AppState>,private graphicsLoaderService:GraphicsLoaderService){
-    super(messageService,store)
     this.src = this.graphicsLoaderService.getGraphic('eventsvideo')
   }
 }

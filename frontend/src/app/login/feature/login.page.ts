@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from '@app/shared/ui/header/header.component';
 import { TextInputComponent } from '@app/shared/ui/text-input/textinput.component';
 import { ButtonComponent } from '@app/shared/ui/button/button.component';
 import { ButtonModule } from 'primeng/button';
@@ -18,25 +17,28 @@ import { IconButtonComponent } from '@app/shared/ui/icon-button/icon-button.comp
 import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-login',
   standalone: true,
-  imports: [HeaderComponent, TextInputComponent,CommonModule, ButtonComponent, ButtonModule,SidebarComponent, IconButtonComponent,AsyncPipe],
+  imports: [PageWrapperComponent, TextInputComponent,CommonModule, ButtonComponent, ButtonModule,SidebarComponent, IconButtonComponent,AsyncPipe],
   providers:[GraphicsLoaderService],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css'
 })
 
-export class LoginPage extends PageWrapperComponent {
+export class LoginPage {
   src:string;
   
-  constructor(private authservice: AuthService, messageService:MessageService,store:Store<AppState>,private graphicsLoaderService:GraphicsLoaderService){
-    super(messageService,store)
+  constructor(
+    private authservice: AuthService, 
+    private messageService:MessageService, 
+    private store:Store<AppState>,
+    private graphicsLoaderService:GraphicsLoaderService
+  ){
     this.src = this.graphicsLoaderService.getGraphic('mbs')
   }
 
   login(){
     this.store.dispatch(Login())
   }
-
   
 }

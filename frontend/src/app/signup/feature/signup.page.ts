@@ -10,29 +10,34 @@ import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-signup-page',
+  selector: 'app-signup',
   standalone: true,
-  imports: [TextInputComponent,ButtonComponent,CommonModule],
+  imports: [PageWrapperComponent, TextInputComponent,ButtonComponent,CommonModule],
   providers:[GraphicsLoaderService],
   templateUrl: './signup.page.html',
   styleUrl: './signup.page.css'
 })
 
-export class SignupPage extends PageWrapperComponent{
-  src:String;
-  stage:number=0;
-  otp:string='';
+export class SignupPage {
+  src: string;
+  stage: number = 0;
+  otp: string = '';
+
+  constructor(
+    private authService: AuthService, 
+    private messageService: MessageService,
+    private store: Store<AppState>,
+    private graphicsLoaderService: GraphicsLoaderService
+  ) {
+    this.src = this.graphicsLoaderService.getGraphic('signupphoto');
+  }
+
+  getOTP() {
+    this.otp = '123'; // Presumably, there would be more logic here.
+  }
+
+  signUpNextStage() {
+    this.stage = 1;
+  }
   
-  constructor(private authservice: AuthService, messageService:MessageService,store:Store<AppState>,private graphicsLoaderService:GraphicsLoaderService){
-    super(messageService,store)
-    this.src = this.graphicsLoaderService.getGraphic('signupphoto')
-  }
-
-  getOTP(){
-    this.otp='123';
-  }
-
-  signUpNextStage(){
-    this.stage=1;
-  }
 }
