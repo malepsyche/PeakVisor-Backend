@@ -9,10 +9,15 @@ const redirectToStravaAuth = (req: Request, res: Response): void => {
   // const redirectUri = `${req.protocol}://${req.get('host')}/strava/callback`;
   // const authUrl = stravaService.getStravaAuthUrl(redirectUri);
   // res.redirect(authUrl);
-  const state: string = req.query.state as string;
-  const redirectUri = `${req.protocol}://${req.get('host')}/strava/callback`;
-  const authUrl = stravaService.getStravaAuthUrl(redirectUri, state); 
-  res.redirect(authUrl);
+  try {
+    const state: string = req.query.state as string;
+    const redirectUri = `${req.protocol}://${req.get('host')}/strava/callback`;
+    const authUrl = stravaService.getStravaAuthUrl(redirectUri, state); 
+    res.redirect(authUrl);
+  } catch (error) {
+    console.error('Error getting strava auth url', error);
+    res.status(500).send('Server error');
+  }
 };
 
 const handleStravaCallback = async (req: Request, res: Response): Promise<void> => {
@@ -20,8 +25,9 @@ const handleStravaCallback = async (req: Request, res: Response): Promise<void> 
   const state: string = decodeURIComponent(req.query.state as string);
 
   try {
+    console.log("code: ", code)
     const tokenData = await stravaService.exchangeCodeForToken(code);
-    console.log(tokenData)
+    console.log("token data: ", tokenData)
     console.log("Obtained tokenData!")
     // res.redirect(`${process.env.FRONTEND_URL}/?token=${tokenData.access_token}`);
     res.redirect(`${state}?token=${tokenData.access_token}`);
@@ -29,7 +35,7 @@ const handleStravaCallback = async (req: Request, res: Response): Promise<void> 
     console.error('Error exchanging code for token:', error);
     res.status(500).send('Server error');
   }
-};
+}; 
 
 export default {
     get,
