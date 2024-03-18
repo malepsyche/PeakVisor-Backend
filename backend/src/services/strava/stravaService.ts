@@ -9,7 +9,7 @@ class StravaService {
     // }
 
     getStravaAuthUrl(redirectUri: string, state: string) {
-        return `https://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=read,activity:read&state=${encodeURIComponent(state)}`;
+        return `http://www.strava.com/oauth/authorize?client_id=${this.clientId}&response_type=code&redirect_uri=${redirectUri}&approval_prompt=force&scope=read&state=${encodeURIComponent(state)}`;
     }
 
     async exchangeCodeForToken(code: string): Promise<any> {
