@@ -13,7 +13,8 @@ module.exports = {
   resolve: {
     alias: {
       '@routes': path.resolve(__dirname, 'src/routes/'),
-      '@controller': path.resolve(__dirname, 'src/controller/')
+      '@controller': path.resolve(__dirname, 'src/controller/'),
+      '@services': path.resolve(__dirname, 'src/services/')
     },
     extensions: ['.tsx', '.ts', '.js', '.json'] // Add or adjust extensions as needed
   },
