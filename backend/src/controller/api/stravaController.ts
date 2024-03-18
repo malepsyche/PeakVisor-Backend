@@ -30,7 +30,7 @@ const handleStravaCallback = async (req: Request, res: Response): Promise<void> 
     console.log("token data: ", tokenData)
     console.log("Obtained tokenData!")
     // res.redirect(`${process.env.FRONTEND_URL}/?token=${tokenData.access_token}`);
-    res.redirect(`${state}?token=${tokenData.access_token}`);
+    res.redirect(`${state}`);
   } catch (error) {
     console.error('Error exchanging code for token:', error);
     res.status(500).send('Server error');
