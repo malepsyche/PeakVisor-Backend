@@ -13,21 +13,37 @@ import { VideoBackground } from '@app/shared/ui/video-background/video-backgroun
 import { HeroComponent } from '@app/shared/ui/hero/hero.component';
 import { GridsectionComponent } from '@app/shared/ui/gridsection/gridsection.component';
 import { ButtongroupComponent } from '../ui/buttongroup/buttongroup.component';
+import { GoogleMapComponent } from '@app/shared/ui/google-map/google-map.component';
+import { NgFor, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-trails',
   standalone: true,
-  imports: [PageWrapperComponent, VideoComponent, PhotoCardComponent,VideoBackground,HeroComponent,GridsectionComponent,ButtongroupComponent],
-  providers:[GraphicsLoaderService, AuthService,MessageService],
+  imports: [
+    NgFor,
+    CommonModule,
+    PageWrapperComponent, 
+    VideoComponent, 
+    PhotoCardComponent,
+    VideoBackground,HeroComponent,
+    GridsectionComponent,
+    ButtongroupComponent,
+    GoogleMapComponent
+  ],
+  providers:[
+    GraphicsLoaderService, 
+    AuthService,
+    MessageService],
   templateUrl: './trails.page.html',
   styleUrl: './trails.page.css'
 })
 
 export class TrailsPage {
 
-  src:string;
-  content = [{name:'MacRitchie',routerLink:'/trailinfo'},{name:'East Coast Park',routerLink:'/trailinfo'},{name:'Botanic Gardens',routerLink:'/trailinfo'},{name:'Chinese Garden',routerLink:'/trailinfo'}]
+  src: string;
   authState$:Observable<boolean>;
+  content: {name: string; routerLink: string }[];
+  trails: {title: string, lat: number, lng: number, mapId: string}[];
 
   constructor(
     private authservice: AuthService, 
@@ -35,8 +51,19 @@ export class TrailsPage {
     private store:Store<AppState>,
     private graphicsLoaderService:GraphicsLoaderService
   ){
-    this.authState$ = this.store.select(SelectAuthenticated)
-    this.src = this.graphicsLoaderService.getGraphic('trailspagevideo')
+    this.src = this.graphicsLoaderService.getGraphic('trailspagevideo');
+    this.authState$ = this.store.select(SelectAuthenticated);
+    this.content = [
+      {name:'MacRitchie',routerLink:'/trailinfo'},
+      {name:'East Coast Park',routerLink:'/trailinfo'},
+      {name:'Botanic Gardens',routerLink:'/trailinfo'},
+      {name:'Chinese Garden',routerLink:'/trailinfo'}
+    ];
+    this.trails = [
+      { title: 'New York', lat: 40.7128, lng: -74.0060, mapId:'1' }, 
+      { title: 'Los Angeles', lat: 34.0522, lng: -118.2437, mapId:'2' }, 
+      { title: 'London', lat: 51.5074, lng: -0.1278, mapId:'3' },   
+    ];
   }
 
 }
